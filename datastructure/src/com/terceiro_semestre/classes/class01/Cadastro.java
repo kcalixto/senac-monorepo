@@ -1,4 +1,4 @@
-package dataStructure.classes.class01;
+package com.terceiro_semestre.classes.class01;
 
 public class Cadastro {
     public static void main(String[] args) {
@@ -8,9 +8,9 @@ public class Cadastro {
         MeuArray.inserir(new Pessoa("Gaia", 4));
         MeuArray.inserir(new Pessoa("Tonica", 8));
         MeuArray.mostrar();
-        
+
         System.out.println("==== Pesquisando... ====");
-        
+
         int id = 1000;
         if (MeuArray.remover(id)) {
             System.out.println("id=" + id + " removido com sucesso!");

@@ -1,4 +1,4 @@
-package dataStructure.classes.class01;
+package com.terceiro_semestre.classes.class01;
 
 public class Pessoa {
     private String nome;
