@@ -10,12 +10,12 @@ class Livro {
     public Livro() {
     }
 
-    public Livro(int id, String autor, String titulo, double preco) {
-        this.id = id;
+    public Livro(String autor, String titulo, double preco) {
         this.autor = autor;
         this.titulo = titulo;
         this.preco = preco;
     }
+
 
     public int getId() {
         return this.id;

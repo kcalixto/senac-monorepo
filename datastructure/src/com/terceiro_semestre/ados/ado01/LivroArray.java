@@ -1,14 +1,10 @@
 package com.terceiro_semestre.ados.ado01;
 
 public class LivroArray {
-
     private Livro[] livros = new Livro[0];
     private int index = livros.length;
 
-    public LivroArray() {
-        System.out.println(livros.length);
-        System.out.println(index);
-    }
+    public LivroArray() {}
 
     public void sort() {
         int arraySize = livros.length;
@@ -68,10 +64,22 @@ public class LivroArray {
         }
     }
 
+    public int genRandomID(){
+        int randomId = (int) (Math.random()*100);
+
+        int foundedID = doBooksBinarySearchByID(randomId);
+        if (foundedID > -1){
+            return genRandomID();
+        }
+
+        return randomId;
+    }
+
     public void add(Livro newLivro) {
+        newLivro.setId(genRandomID());
+        
         if (index >= livros.length) {
             index++;
-            System.out.println("[debug] index incremented by one, new value: " + index);
 
             // Save in "cache"
             Livro[] temp = new Livro[livros.length];
@@ -89,36 +97,20 @@ public class LivroArray {
         livros[index - 1] = newLivro;
     }
 
-    public boolean remove(int id) {
-        boolean found = false;
+    public Livro remove(int id) {
+        int target = doBooksBinarySearchByID(id);
+        Livro removed_book = null;
 
-        int start = 0;
-        int end = index - 1;
-        int half = 0;
-
-        int target = 0;
-
-        while (start <= end && !found) {
-            half = (end + start) / 2;
-
-            if (id == this.livros[half].getId()) {
-                target = half;
-                found = true;
-            } else if (id > this.livros[half].getId()) {
-                start = half + 1;
-            } else {
-                end = half - 1;
-            }
-        }
-
-        if (!found) {
-            return false;
+        // Se o ID não foi encontrado, a resposta padrão é -1
+        if (target == -1) {
+            return null;
         }
 
         Livro[] temp = new Livro[livros.length - 1];
         int j = 0;
         for (int i = 0; i < temp.length; i++) {
             if (i == target) {
+                removed_book = livros[i];
                 j++;
             }
             temp[i] = livros[j];
@@ -131,25 +123,50 @@ public class LivroArray {
             livros[i] = temp[i];
         }
 
-        return true;
+        return removed_book;
     }
 
-    public Livro search(String titulo) {
+    private int doBooksBinarySearchByID(int id){
+        boolean found = false;
+
         int start = 0;
         int end = index - 1;
         int half = 0;
 
-        while (start <= end) {
+        while (start <= end && !found) {
             half = (end + start) / 2;
 
-            if (titulo.equalsIgnoreCase(this.livros[half].getTitulo())) {
-                return this.livros[half];
-            } else if (titulo.length() > this.livros[half].getTitulo().length()) {
+            if (id == this.livros[half].getId()) {
+                return half;
+            } else if (id > this.livros[half].getId()) {
                 start = half + 1;
             } else {
                 end = half - 1;
             }
         }
+
+        return -1;
+    }
+
+    public Livro search(String titulo) {
+        int counter = 0;
+        int arraySize = this.livros.length - 1;
+        
+        while (counter <= arraySize) {
+            int half = counter + (arraySize - counter) / 2;
+            int res = titulo.compareTo(this.livros[half].getTitulo());
+ 
+            if (res == 0){
+                return this.livros[half];
+            }
+ 
+            if (res > 0){
+                counter = half + 1;
+            } else{
+                arraySize = half - 1;
+            }
+        }
+ 
         return null;
     }
 
