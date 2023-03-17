@@ -101,6 +101,10 @@ public class LivroArray {
         int target = doBooksBinarySearchByID(id);
         Livro removed_book = null;
 
+        if (livros.length == 1){
+            removed_book = livros[0];
+        }
+
         // Se o ID não foi encontrado, a resposta padrão é -1
         if (target == -1) {
             return null;
@@ -123,17 +127,17 @@ public class LivroArray {
             livros[i] = temp[i];
         }
 
+        index--;
+
         return removed_book;
     }
 
     private int doBooksBinarySearchByID(int id){
-        boolean found = false;
-
         int start = 0;
         int end = index - 1;
         int half = 0;
 
-        while (start <= end && !found) {
+        while (start <= end) {
             half = (end + start) / 2;
 
             if (id == this.livros[half].getId()) {
@@ -168,6 +172,10 @@ public class LivroArray {
         }
  
         return null;
+    }
+
+    public int length(){
+        return this.livros.length;
     }
 
     @Override
