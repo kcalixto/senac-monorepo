@@ -1,5 +1,8 @@
 package com.terceiro_semestre.ados.ado01;
 
+/**
+ * Objeto principal desta aplicação
+ */
 class Livro {
     private int id; // todo gerar id aleatório
     // todo documentar tudo
@@ -50,6 +53,9 @@ class Livro {
     }
 
     @Override
+    /**
+     * Método que converte este objeto para um objeto do tipo String
+     */
     public String toString() {
         return String.format("id: %d\nautor: %s\ntitulo: %s\npreço: %.2f", this.id, this.autor, this.titulo,
                 this.preco);

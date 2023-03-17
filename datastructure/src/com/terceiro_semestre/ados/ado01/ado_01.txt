@@ -1,11 +1,11 @@
 ADO 1 - Estruturas de Dados
 
-Essa entrega de ADO pode ser feita em dupla.
-Todas as classes devem ser documentadas, no início da classe, com os nomes completos dos alunos e os seus respectivos ids.
-Todos os métodos solicitados devem ter javadoc.
-Entregue apenas os códigos, de tudo que foi criado/solicitado, em arquivos textos, mantendo a indentação do código.
-Não entregue arquivos compactados.
-Não serão aceitas soluções em outras linguagens de programação que não seja o Java.
+✅Essa entrega de ADO pode ser feita em dupla.
+✅Todas as classes devem ser documentadas, no início da classe, com os nomes completos dos alunos e os seus respectivos ids.
+✅Todos os métodos solicitados devem ter javadoc.
+✅Entregue apenas os códigos, de tudo que foi criado/solicitado, em arquivos textos, mantendo a indentação do código.
+✅Não entregue arquivos compactados.
+✅Não serão aceitas soluções em outras linguagens de programação que não seja o Java.
 
 
 ✅ Elabore um projeto Java de uma classe Livro com os atributos: *id (int), autor, título
@@ -26,5 +26,5 @@ obrigatoriamente, o método quick sort ou merge sort na versão passada em aula.
 
 ✅ *O id deve ser gerado aleatoriamente e não duplicado.
 
-Na classe principal, instancie a classe Livro e escreva uma lógica permitindo que o
+✅ Na classe principal, instancie a classe Livro e escreva uma lógica permitindo que o
 usuário selecione a operação desejada do programa, incluindo o seu encerramento.

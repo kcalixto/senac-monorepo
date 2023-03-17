@@ -1,11 +1,19 @@
 package com.terceiro_semestre.ados.ado01;
 
+/**
+ * Esse objeto cria uma array de objetos do tipo Livro e trabalha ela dentro da
+ * aplicação
+ */
 public class LivroArray {
     private Livro[] livros = new Livro[0];
     private int index = livros.length;
 
-    public LivroArray() {}
+    public LivroArray() {
+    }
 
+    /**
+     * Método que organiza os livros criados por ID
+     */
     public void sort() {
         int arraySize = livros.length;
 
@@ -64,20 +72,27 @@ public class LivroArray {
         }
     }
 
-    public int genRandomID(){
-        int randomId = (int) (Math.random()*100);
+    /**
+     * Método que gera um ID aleatório para um novo Livro, ignorando os IDs que já
+     * existem
+     */
+    public int genRandomID() {
+        int randomId = (int) (Math.random() * 100);
 
         int foundedID = doBooksBinarySearchByID(randomId);
-        if (foundedID > -1){
+        if (foundedID > -1) {
             return genRandomID();
         }
 
         return randomId;
     }
 
+    /**
+     * Método que adiciona novo livro para a array interna deste objeto
+     */
     public void add(Livro newLivro) {
         newLivro.setId(genRandomID());
-        
+
         if (index >= livros.length) {
             index++;
 
@@ -97,11 +112,14 @@ public class LivroArray {
         livros[index - 1] = newLivro;
     }
 
+    /**
+     * Método que remove um livro da array interna deste objeto pelo ID informado
+     */
     public Livro remove(int id) {
         int target = doBooksBinarySearchByID(id);
         Livro removed_book = null;
 
-        if (livros.length == 1){
+        if (livros.length == 1) {
             removed_book = livros[0];
         }
 
@@ -132,7 +150,11 @@ public class LivroArray {
         return removed_book;
     }
 
-    private int doBooksBinarySearchByID(int id){
+    /**
+     * Método que utiliza a busca binária para achar um livro dentro da array
+     * interna deste objeto
+     */
+    private int doBooksBinarySearchByID(int id) {
         int start = 0;
         int end = index - 1;
         int half = 0;
@@ -152,33 +174,43 @@ public class LivroArray {
         return -1;
     }
 
+    /**
+     * Método que utiliza busca binária para encontrar um livro pelo título
+     */
     public Livro search(String titulo) {
         int counter = 0;
         int arraySize = this.livros.length - 1;
-        
+
         while (counter <= arraySize) {
             int half = counter + (arraySize - counter) / 2;
             int res = titulo.compareTo(this.livros[half].getTitulo());
- 
-            if (res == 0){
+
+            if (res == 0) {
                 return this.livros[half];
             }
- 
-            if (res > 0){
+
+            if (res > 0) {
                 counter = half + 1;
-            } else{
+            } else {
                 arraySize = half - 1;
             }
         }
- 
+
         return null;
     }
 
-    public int length(){
+    /**
+     * Método que retorna tamanho da array interna de livros
+     */
+    public int length() {
         return this.livros.length;
     }
 
     @Override
+    /**
+     * Método que retorna uma string de todos os livros presentes na array interna
+     * deste objeto
+     */
     public String toString() {
         String str = "";
         for (Livro livro : this.livros) {

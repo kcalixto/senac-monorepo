@@ -3,18 +3,26 @@ package com.terceiro_semestre.ados.ado01;
 import java.util.Scanner;
 
 /**
- * @author Kauã Chaves Calixto - 
- * @author Vinícius não lembro -
+ * @author Kauã Chaves Calixto -
+ * @author Vinícius Nunes dos Santos -
  * 
- * Essa classe instancia 
+ *         Essa classe instancia a Base de dados de Livros e cria a interface de
+ *         texto (CLI) para utilizarmos a aplicação
  */
 class ADO01 {
     private LivroArray livros = new LivroArray();
 
+    /**
+     * Esse método mostra as opções disponíveis na aplicação
+     */
     public void showOptions() {
         log("------------------------------\n1. Adicionar Livro\n2. Remover Livro por ID\n3. Buscar Livro por Título\n4. Sair");
     }
 
+    /**
+     * Esse método recebe qual opção a pessoa escolheu.
+     * Em caso de caracteres inválidos ou erros de execução ele pergunta novamente.
+     */
     public int ask(Scanner input) {
         try {
             log("Qual opção você quer executar?\n");
@@ -26,6 +34,10 @@ class ADO01 {
         }
     }
 
+    /**
+     * Esse método recebe qual opção a pessoa escolheu.
+     * Em caso de caracteres inválidos ou erros de execução ele pergunta novamente.
+     */
     public String askStr(Scanner input, String log) {
         try {
             log(log);
@@ -39,6 +51,10 @@ class ADO01 {
         }
     }
 
+    /**
+     * Esse método recebe qual opção a pessoa escolheu.
+     * Em caso de caracteres inválidos ou erros de execução ele pergunta novamente.
+     */
     public Double askPrice(Scanner input) {
         Double price = 0.0;
         try {
@@ -49,6 +65,10 @@ class ADO01 {
         }
     }
 
+    /**
+     * Esse método pergunta os campos necessários pra criar um novo objeto do tipo
+     * Livro e retorna
+     */
     public Livro askLivro(Scanner input) {
         Livro l = new Livro();
 
@@ -59,6 +79,9 @@ class ADO01 {
         return l;
     }
 
+    /**
+     * Método de execução principal
+     */
     public ADO01() {
         try (Scanner input = new Scanner(System.in)) {
             int EXIT = 4;
@@ -118,6 +141,9 @@ class ADO01 {
         }
     }
 
+    /**
+     * Método de log padrão
+     */
     public void log(String input) {
         System.out.println(input + "\n");
     }
