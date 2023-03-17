@@ -1,8 +1,12 @@
 package com.terceiro_semestre.ados.ado01;
 
 /**
- * Esse objeto cria uma array de objetos do tipo Livro e trabalha ela dentro da
- * aplicação
+ * @author Kauã Chaves Calixto - 1142327170
+ * @author Vinícius Nunes dos Santos - 1142328153
+ * 
+ *         Esse objeto cria uma array de objetos do tipo Livro e trabalha ela
+ *         dentro da
+ *         aplicação
  */
 public class LivroArray {
     private Livro[] livros = new Livro[0];

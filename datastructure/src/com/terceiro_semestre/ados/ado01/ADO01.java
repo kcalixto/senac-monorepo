@@ -3,8 +3,8 @@ package com.terceiro_semestre.ados.ado01;
 import java.util.Scanner;
 
 /**
- * @author Kauã Chaves Calixto -
- * @author Vinícius Nunes dos Santos -
+ * @author Kauã Chaves Calixto - 1142327170
+ * @author Vinícius Nunes dos Santos - 1142328153
  * 
  *         Essa classe instancia a Base de dados de Livros e cria a interface de
  *         texto (CLI) para utilizarmos a aplicação

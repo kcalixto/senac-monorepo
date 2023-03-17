@@ -1,7 +1,10 @@
 package com.terceiro_semestre.ados.ado01;
 
 /**
- * Objeto principal desta aplicação
+ * @author Kauã Chaves Calixto - 1142327170
+ * @author Vinícius Nunes dos Santos - 1142328153
+ * 
+ *         Objeto principal desta aplicação
  */
 class Livro {
     private int id; // todo gerar id aleatório
@@ -18,7 +21,6 @@ class Livro {
         this.titulo = titulo;
         this.preco = preco;
     }
-
 
     public int getId() {
         return this.id;
