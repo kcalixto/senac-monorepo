@@ -39,6 +39,7 @@ export default function App() {
 const styles = StyleSheet.create({
   inputs: {
     nome: {
+      width: "80%",
       fontSize: 20,
       borderColor: "black",
       borderWidth: 1,
