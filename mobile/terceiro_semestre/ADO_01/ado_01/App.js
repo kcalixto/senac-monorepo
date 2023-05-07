@@ -1,6 +1,14 @@
+import { useState } from "react"
 import { TextInput, View } from "react-native"
 
 export default function App() {
+  const [form, setForm] = useState({
+    "nome": "",
+    "sobrenome": "",
+    "telefone": "",
+    "endereco": "",
+  })
+
   return (
     <View style={styles.container}>
       <>
