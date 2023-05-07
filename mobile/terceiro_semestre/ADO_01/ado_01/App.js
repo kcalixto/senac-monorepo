@@ -1,9 +1,13 @@
-import { View } from "react-native"
+import { TextInput, View } from "react-native"
 
 export default function App() {
   return (
     <View style={styles.container}>
-
+      <>
+        <TextInput
+          placeholder="Digite seu Nome Completo"
+        />
+      </>
     </View>
   );
 }
