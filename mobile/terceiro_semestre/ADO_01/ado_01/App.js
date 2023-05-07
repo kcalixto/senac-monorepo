@@ -46,6 +46,16 @@ const styles = StyleSheet.create({
     }
   },
 
+  touchable: {
+    padding: 10,
+  },
+
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+  },
+
   container: {
     flex: 1,
     alignItems: 'center',
