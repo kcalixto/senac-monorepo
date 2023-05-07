@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TextInput, View, TouchableHighlight } from "react-native"
+import { TextInput, View, TouchableHighlight, StyleSheet, Text } from "react-native"
 
 export default function App() {
   const [form, setForm] = useState({
