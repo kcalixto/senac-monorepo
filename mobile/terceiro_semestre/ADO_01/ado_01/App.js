@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TextInput, View } from "react-native"
+import { TextInput, View, TouchableHighlight } from "react-native"
 
 export default function App() {
   const [form, setForm] = useState({
@@ -16,8 +16,14 @@ export default function App() {
           style={styles.inputs.nome}
           placeholder="Digite seu Nome Completo"
         />
+
+        <TouchableHighlight style={styles.touchable}>
+          <View style={styles.button}>
+            <Text>Confirmar</Text>
+          </View>
+        </TouchableHighlight>
       </>
-      
+
       <>
         <>
           <Text>Seu nome: {form.nome}</Text>
@@ -31,7 +37,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  inputs:{
+  inputs: {
     nome: {
       fontSize: 20,
       borderColor: "black",
