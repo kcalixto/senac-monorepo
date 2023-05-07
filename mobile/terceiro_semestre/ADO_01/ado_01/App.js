@@ -9,12 +9,20 @@ export default function App() {
     "endereco": "Rua dos Testes",
   })
 
+  const onChangeText = (text, field) => {
+    let newForm = form
+    newForm[field] = text
+    console.log("newForm: ", newForm);
+    setForm(newForm)
+  }
+
   return (
     <View style={styles.container}>
       <>
         <TextInput
           style={styles.inputs.nome}
           placeholder="Digite seu Nome Completo"
+          onChangeText={text => onChangeText(text, "nome")}
         />
 
         <TouchableHighlight style={styles.touchable}>
