@@ -1,3 +1,0 @@
-1) Implementação do quick-sort em java
-2) Implementar o Insertion Sort em java
-3) Faça a implementação de um pilha usando vetores. Usando ou não orientação objeto.
