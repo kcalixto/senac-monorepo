@@ -1,0 +1,74 @@
+body {
+    border: 1px solid grey;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.container {
+    background-color: #f0f0f0;
+    max-width: 50%;
+}
+
+.photo {
+    max-width: 250px;
+    max-height: 250px;
+    margin: 1rem;
+}
+
+.info {
+    margin: 1rem;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-equals {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-column-equals {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.media-image {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 1rem;
+}
+
+.card {
+    margin: 1rem !important;
+    border-top: 1.5rem solid cadetblue !important;
+}
+
+.project-portfolio li {
+    max-width: 30%;
+}
+
+.academic-learning li {
+    width: 100%;
+}
+
+.next-steps li {
+    max-width: 30%;
+}
