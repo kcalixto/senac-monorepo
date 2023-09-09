@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AdoApplication",
+            "request": "launch",
+            "mainClass": "com.kcalixto.web.ado1.api.AdoApplication",
+            "projectName": "api"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AdoApplication<api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.kcalixto.web.ado1.ado.AdoApplication",
+            "projectName": "api",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

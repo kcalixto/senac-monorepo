@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <title>Kaua Calixto CV</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="introduction-container flex-row">
+            <div class="photo">
+                <img class="photo-img img-thumbnail img-responsive" th:src="@{/images/PP.jpg}" alt="foto">
+            </div>
+            <div class="info flex-column">
+                <p class="nome display-4"></p>
+                <p class="phone"></p>
+                <p class="email"></p>
+                <p class="birth_date">Data de Nascimento:
+                <p class="birth_date_content"></p>
+                </p>
+
+                <div class="social-media-container">
+                    <ul class="media"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-container card text-center">
+            <h2 class="title">Experiência Profissional</h2>
+            <ul class="experience"> </ul>
+        </div>
+
+        <div class="academic-information-container card text-center">
+            <h2 class="title">Formação Acadêmica</h2>
+            <ul class="academic"></ul>
+        </div>
+
+        <div class="project-portfolio-container card text-center">
+            <h3 class="title">Projetos Pessoais</h3>
+
+            <ul class="project-portfolio flex-row-equals"></ul>
+        </div>
+
+        <div class="next-steps-container card text-center">
+            <h3 class="title">Interesses</h3>
+            <ul class="next-steps flex-row-equals"></ul>
+        </div>
+
+        <div class="languages-container card text-center">
+            <h2 class="title">Idiomas</h2>
+            <table class="languages table">
+                <thead class="languages-thead">
+                    <tr class="languages-tr">
+                        <th class="languages-th">Idioma</th>
+                        <th class="languages-th">Leitura</th>
+                        <th class="languages-th">Escrita</th>
+                        <th class="languages-th">Conversação</th>
+                    </tr>
+                </thead>
+                <tbody class="languages-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function getJson(url) {
+            const promise = new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
+                        resolve(JSON.parse(xhr.responseText));
+                    } else {
+                        const error = {
+                            statusCode: xhr.status,
+                            xhr: xhr
+                        }
+                        reject(error);
+                    }
+                }
+                xhr.send();
+            });
+            return promise;
+        }
+
+        async function fetchData() {
+            try {
+                console.log("loading data...")
+                const response = await getJson('/user');
+                console.log("response: ", response)
+                return response;
+            } catch (err) {
+                alert(JSON.stringify(err));
+            }
+        }
+
+        function setContent(className, text) {
+            document.querySelector(className).innerHTML = text;
+        }
+
+        function fill_ul(className, li_list) {
+            const ul = document.querySelector(className);
+            li_list.forEach(li => {
+                ul.appendChild(li);
+            });
+        }
+
+        function new_li(className, content) {
+            const li = document.createElement("li");
+            li.className = className;
+            li.innerHTML = content;
+            return li;
+        }
+
+        function fillSimpleData(data) {
+            setContent(".nome", data?.name ?? "");
+            setContent(".phone", data?.phone ?? "");
+            setContent(".email", data?.email ?? "");
+            setContent(".birth_date_content", data?.birth_date ?? "");
+        }
+
+        function fillSocialMedia(data) {
+            const social_media = (data?.socialMedia ?? []).map(item => {
+                const name = item?.name ?? "";
+                const url = item?.url ?? "";
+                const icon = item?.icon ?? "";
+
+                return new_li(
+                    `media-${name}`,
+                    `<div class="media-image ${name}">
+                            <a href="${url}" class="media-title">
+                                <img class="img-fluid rounded-circle"
+                                    src="${icon}" alt="${name}">
+                            </a>
+                        </div>`
+                )
+            })
+
+            fill_ul(".media", social_media)
+        }
+
+        function fillExperience(data) {
+            const experience = (data?.professionalExperience ?? []).map(item => {
+                const company = item?.company ?? "";
+                const company_slug = item?.company_slug ?? "";
+                const start_date = item?.start_date ?? "";
+                const end_date = item?.end_date ?? "";
+                const role = item?.role ?? "";
+                const tasks = (item?.tasks ?? []).map(task => {
+                    const title = task?.title ?? "";
+                    const slug = task?.slug ?? "";
+
+                    return new_li(
+                        `experience-task ${slug}`,
+                        `<a class="experience-title">${title}</a>`
+                    )
+                })
+
+                return new_li(
+                    `experience-${company_slug}`,
+                    `
+                        <a class="experience-title">${company}</a>
+                        <p class="experience-description">${role}</p>
+                        <p class="experience-date">${start_date} - ${end_date}</p>
+                        <ul class="experience-tasks">
+                            ${tasks.map(task => task.outerHTML).join("")}
+                        </ul>
+                    `
+                )
+            })
+
+            fill_ul(".experience", experience)
+        }
+
+        function fillAcademic(data) {
+            const academic = (data?.academicExperience ?? []).map(item => {
+                const institution = item?.institution ?? "";
+                const course = item?.course ?? "";
+                const start_date = item?.start_date ?? "";
+                const end_date = item?.end_date ?? "";
+
+                const learning = (item?.learning ?? []).map(learning => {
+                    const semester = learning?.semester ?? "";
+                    const description = learning?.description ?? "";
+                    const githubURL = learning?.githubURL ?? "";
+                    const subjects = (learning?.subjects ?? []).map((subject) => {
+                        const el = document.createElement("tr")
+                        el.innerHTML = `
+                            <td>${subject}</td>
+                        `
+                        return el
+                    })
+
+
+                    return new_li(
+                        `academic-content card`,
+                        `
+                            <p class="academic-content-title">${semester}</p>
+                            <p class="academic-content-description">${description}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Funcionalidades</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${subjects.map((subject) => subject.outerHTML).join("")}
+                                    </tbody>
+                                </table>
+                            </p>
+                            <a href="${githubURL}" class="academic-learning-external-url">Link para o GitHub</a>
+                        `
+                    )
+                })
+
+                return new_li(
+                    `academic-graduation`,
+                    `
+                        <a href="https://www.sp.senac.br" class="academic-title">Universidade Senac São Paulo</a>
+                        <p class="academic-course">Análise e Desenvolvimento de Sistemas</p>
+                        <p class="academic-date">Fevereiro de 2022 - Atualmente</p>
+                        <div class="flex-column">
+                            <ul class="academic-learning flex-row">
+                                ${learning.map(learning => learning.outerHTML).join("")}
+                            </ul>
+                        </div>
+                    `
+                )
+            })
+
+            fill_ul(".academic", academic)
+        }
+
+        function fillPersonalProjects(data) {
+            const personalProjects = (data?.personalProjects ?? []).map(item => {
+                const title = item?.title ?? "";
+                const slug = item?.slug ?? "";
+                const description = item?.description ?? "";
+
+                const links = []
+                const linksObject = item?.links ?? {}
+                for (const key of Object.keys(linksObject)) {
+                    const value = linksObject[key]
+                    const el = document.createElement("a")
+                    el.className = `project-external-link`
+                    el.href = value
+                    el.innerHTML = key
+                    links.push(el)
+                }
+
+                return new_li(
+                    `project ${slug}`,
+                    `
+                        <p class="project-title">${title}</p>
+                        <p class="project-overview">${description}</p>
+                        ${links.map(link => link.outerHTML).join("")}
+                    `
+                )
+            })
+
+            fill_ul(".project-portfolio", personalProjects)
+        }
+
+        function fillInterests(data) {
+            const interests = (data?.interests ?? []).map(item => {
+                const title = item?.title ?? "";
+                const slug = item?.slug ?? "";
+                const description = item?.description ?? "";
+
+                return new_li(
+                    "step",
+                    `
+                        <p class="step-title">${title}</p>
+                        <p class="step-overview">${description}</p>
+                    `
+                )
+            })
+
+            fill_ul(".next-steps", interests)
+        }
+
+        function fillLanguages(data) {
+            const interests = (data?.languages ?? []).map(item => {
+                const name = item?.name ?? "";
+                const readLevel = item?.readLevel ?? "";
+                const writeLevel = item?.writeLevel ?? "";
+                const speakLevel = item?.speakLevel ?? "";
+
+                const el = document.querySelector(".languages-tbody")
+                el.innerHTML += `
+                    <tr>
+                        <td>${name}</td>
+                        <td>${readLevel}</td>
+                        <td>${writeLevel}</td>
+                        <td>${speakLevel}</td>
+                    </tr>
+                `
+            })
+        }
+
+        const fill = {
+            simpleData: fillSimpleData,
+            socialMedia: fillSocialMedia,
+            experience: fillExperience,
+            academic: fillAcademic,
+            personalProjects: fillPersonalProjects,
+            interests: fillInterests,
+            languages: fillLanguages,
+        }
+        fetchData().then(data => {
+            fill.simpleData(data);
+            fill.socialMedia(data);
+            fill.experience(data);
+            fill.academic(data);
+            fill.personalProjects(data);
+            fill.interests(data);
+            fill.languages(data);
+        })
+    </script>
+</body>
+
+</html>
